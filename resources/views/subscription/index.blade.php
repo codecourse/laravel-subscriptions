@@ -28,6 +28,12 @@
                     </div>
                 @endif
             @endif
+
+            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                <div class="max-w-xl">
+                    @include('subscription.partials.invoices')
+                </div>
+            </div>
         </div>
     </div>
 </x-app-layout>

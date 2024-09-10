@@ -13,7 +13,8 @@ class SubscriptionController extends Controller
             'plan' => $request->user()->subscribed()
                 ? new StripeSubscriptionDecorator($request->user()->subscription()->asStripeSubscription())
                 : null,
-            'upcoming' => $request->user()->upcomingInvoice()
+            'upcoming' => $request->user()->upcomingInvoice(),
+            'invoices' => $request->user()->invoices(),
         ]);
     }
 
