@@ -1,10 +1,14 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
+
+Route::get('/plans', [PlanController::class, 'index'])
+    ->name('plans');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
