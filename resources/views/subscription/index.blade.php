@@ -28,7 +28,6 @@
                     </div>
                 @endif
             @endif
-
         </div>
     </div>
 </x-app-layout>
