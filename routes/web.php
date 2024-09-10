@@ -37,6 +37,8 @@ Route::group(['prefix' => 'subscription'], function () {
 
     Route::post('/resume', [SubscriptionController::class, 'resume'])->name('subscription.resume');
     Route::post('/cancel', [SubscriptionController::class, 'cancel'])->name('subscription.cancel');
+
+    Route::get('/invoice', [SubscriptionController::class, 'invoice'])->name('subscription.invoice');
 })
     ->middleware(['auth']);
 

@@ -36,4 +36,9 @@ class SubscriptionController extends Controller
 
         return back();
     }
+
+    public function invoice(Request $request)
+    {
+        return $request->user()->downloadInvoice($request->invoice);
+    }
 }

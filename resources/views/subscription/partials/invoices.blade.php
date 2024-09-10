@@ -13,7 +13,7 @@
         <ul>
             @foreach($invoices as $invoice)
                 <li>
-                    <strong>{{ $invoice->date()->toDateString() }}</strong>. {{ $invoice->total() }}. <a href="#" class="text-indigo-500">Download</a>
+                    <strong>{{ $invoice->date()->toDateString() }}</strong>. {{ $invoice->total() }}. <a href="{{ route('subscription.invoice', ['invoice' => $invoice->id]) }}" class="text-indigo-500">Download</a>
                 </li>
             @endforeach
         </ul>
