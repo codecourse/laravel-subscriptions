@@ -21,4 +21,18 @@ class SubscriptionController extends Controller
     {
         return $request->user()->redirectToBillingPortal(route('subscription'));
     }
+
+    public function resume(Request $request)
+    {
+        $request->user()->subscription()->resume();
+
+        return back();
+    }
+
+    public function cancel(Request $request)
+    {
+        $request->user()->subscription()->cancel();
+
+        return back();
+    }
 }

@@ -34,6 +34,9 @@ Route::middleware('auth')->group(function () {
 Route::group(['prefix' => 'subscription'], function () {
     Route::get('/', [SubscriptionController::class, 'index'])->name('subscription');
     Route::get('/portal', [SubscriptionController::class, 'portal'])->name('subscription.portal');
+
+    Route::post('/resume', [SubscriptionController::class, 'resume'])->name('subscription.resume');
+    Route::post('/cancel', [SubscriptionController::class, 'cancel'])->name('subscription.cancel');
 })
     ->middleware(['auth']);
 

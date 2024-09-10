@@ -15,12 +15,19 @@
                 <li>
                     <strong>Plan</strong>: {{ $plan->title() }}
                 </li>
+
                 @if ($upcoming)
                     <li>
                         <strong>Renews</strong>: {{ $upcoming->date()->toDateString() }} ({{ $upcoming->date()->diffForHumans() }})
                     </li>
                     <li>
                         <strong>Next charge</strong>: {{ $upcoming->total() }}
+                    </li>
+                @endif
+
+                @if (auth()->user()->subscription()->canceled())
+                    <li>
+                        <strong>Ends</strong>: {{ auth()->user()->subscription()->ends_at->toDateString() }} ({{ auth()->user()->subscription()->ends_at->diffForHumans() }})
                     </li>
                 @endif
             </ul>

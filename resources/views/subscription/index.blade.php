@@ -12,6 +12,23 @@
                     @include('subscription.partials.details')
                 </div>
             </div>
+
+            @if (auth()->user()->subscribed())
+                @if (auth()->user()->subscription()->canceled())
+                    <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                        <div class="max-w-xl">
+                            @include('subscription.partials.resume')
+                        </div>
+                    </div>
+                @else
+                    <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                        <div class="max-w-xl">
+                            @include('subscription.partials.cancel')
+                        </div>
+                    </div>
+                @endif
+            @endif
+
         </div>
     </div>
 </x-app-layout>
