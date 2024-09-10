@@ -12,7 +12,7 @@
                             <span class="text-5xl font-bold tracking-tight text-gray-900">$15</span>
                             <span class="text-sm font-semibold leading-6 text-gray-600">/month</span>
                         </p>
-                        <x-primary-link-button href="#" class="mt-8 w-1/2 justify-center">
+                        <x-primary-link-button href="{{ route('checkout', ['plan' => 'monthly']) }}" class="mt-8 w-1/2 justify-center">
                             Buy plan
                         </x-primary-link-button>
                     </div>
@@ -22,7 +22,7 @@
                             <span class="text-5xl font-bold tracking-tight text-gray-900">$120</span>
                             <span class="text-sm font-semibold leading-6 text-gray-600">/year</span>
                         </p>
-                        <x-primary-link-button href="#" class="mt-8 w-1/2 justify-center">
+                        <x-primary-link-button href="{{ route('checkout', ['plan' => 'yearly']) }}" class="mt-8 w-1/2 justify-center">
                             Buy plan
                         </x-primary-link-button>
                     </div>
