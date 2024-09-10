@@ -15,6 +15,14 @@
                 <li>
                     <strong>Plan</strong>: {{ $plan->title() }}
                 </li>
+                @if ($upcoming)
+                    <li>
+                        <strong>Renews</strong>: {{ $upcoming->date()->toDateString() }} ({{ $upcoming->date()->diffForHumans() }})
+                    </li>
+                    <li>
+                        <strong>Next charge</strong>: {{ $upcoming->total() }}
+                    </li>
+                @endif
             </ul>
 
             <x-primary-link-button href="{{ route('subscription.portal') }}">
