@@ -9,8 +9,14 @@
         </p>
     </header>
 
-    <div class="mt-6">
+    <div class="mt-6 space-y-6">
         @if(auth()->user()->subscribed())
+            <ul>
+                <li>
+                    <strong>Plan</strong>: {{ $plan->title() }}
+                </li>
+            </ul>
+
             <x-primary-link-button href="{{ route('subscription.portal') }}">
                 Manage your subscription
             </x-primary-link-button>

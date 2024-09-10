@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Subscription\StripeSubscriptionDecorator;
 use Illuminate\Http\Request;
 
 class SubscriptionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('subscription.index');
+        return view('subscription.index', [
+            'plan' => $request->user()->subscribed()
+                ? new StripeSubscriptionDecorator($request->user()->subscription()->asStripeSubscription())
+                : null,
+        ]);
     }
 
     public function portal(Request $request)
