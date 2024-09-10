@@ -29,6 +29,12 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+                @if (($subscription = auth()->user()?->subscription())?->onTrial())
+                    <div class="text-sm mr-6 text-gray-500">
+                        Trial ends in {{ floor(now()->diffInDays($subscription->trial_ends_at)) }} days
+                    </div>
+                @endif
+
                 @auth
                     <x-dropdown align="right" width="48">
                     <x-slot name="trigger">

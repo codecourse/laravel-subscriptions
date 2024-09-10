@@ -14,6 +14,7 @@ class CheckoutController extends Controller
         );
 
         return $request->user()->newSubscription('default', $plan['price_id'])
+            ->trialDays(4)
             ->allowPromotionCodes()
             ->checkout([
                 'success_url' => route('dashboard'),
