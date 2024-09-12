@@ -6,19 +6,23 @@ use App\Http\Controllers\PlanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProtectedController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Middleware\RedirectIfCancelled;
+use App\Http\Middleware\RedirectIfNotCancelled;
 use App\Http\Middleware\RedirectIfNotSubscribed;
+use App\Http\Middleware\RedirectIfSubscribed;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
 
 Route::get('/plans', [PlanController::class, 'index'])
+    ->middleware([RedirectIfSubscribed::class])
     ->name('plans');
 
 Route::get('/checkout', [CheckoutController::class, 'index'])
     ->name('checkout');
 
 Route::get('/protected', [ProtectedController::class, 'index'])
-    ->middleware([RedirectIfNotSubscribed::class])
+    ->middleware(['auth', 'subscribed'])
     ->name('protected');
 
 Route::get('/dashboard', function () {
@@ -33,12 +37,20 @@ Route::middleware('auth')->group(function () {
 
 Route::group(['prefix' => 'subscription'], function () {
     Route::get('/', [SubscriptionController::class, 'index'])->name('subscription');
-    Route::get('/portal', [SubscriptionController::class, 'portal'])->name('subscription.portal');
+    Route::get('/portal', [SubscriptionController::class, 'portal'])
+        ->middleware([RedirectIfNotSubscribed::class])
+        ->name('subscription.portal');
 
-    Route::post('/resume', [SubscriptionController::class, 'resume'])->name('subscription.resume');
-    Route::post('/cancel', [SubscriptionController::class, 'cancel'])->name('subscription.cancel');
+    Route::post('/resume', [SubscriptionController::class, 'resume'])
+        ->middleware([RedirectIfNotCancelled::class])
+        ->name('subscription.resume');
 
-    Route::get('/invoice', [SubscriptionController::class, 'invoice'])->name('subscription.invoice');
+    Route::post('/cancel', [SubscriptionController::class, 'cancel'])
+        ->middleware([RedirectIfCancelled::class])
+        ->name('subscription.cancel');
+
+    Route::get('/invoice', [SubscriptionController::class, 'invoice'])
+        ->name('subscription.invoice');
 })
     ->middleware(['auth']);
 
