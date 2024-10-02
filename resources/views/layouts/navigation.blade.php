@@ -37,6 +37,12 @@
                     </div>
                 @endif
 
+                @if (auth()->user()?->hasIncompletePayment())
+                    <div class="text-sm mr-6 text-gray-500">
+                        Your payment is failing. <a href="{{ route('subscription.portal') }}" class="text-indigo-500">Update card</a>
+                    </div>
+                @endif
+
                 @auth
                     <x-dropdown align="right" width="48">
                     <x-slot name="trigger">

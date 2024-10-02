@@ -14,11 +14,16 @@ class CheckoutController extends Controller
         );
 
         return $request->user()->newSubscription('default', $plan['price_id'])
-            ->trialDays(4)
+            //->trialDays(4)
             ->allowPromotionCodes()
             ->checkout([
                 'success_url' => route('dashboard'),
-                'cancel_url' => route('plans')
+                'cancel_url' => route('plans'),
+                [
+                    'metadata' => [
+                        'tenant_id' => 'YOUR_TENANT_ID_HERE'
+                    ]
+                ]
             ], [
                 'email' => $request->user()->email
             ]);
