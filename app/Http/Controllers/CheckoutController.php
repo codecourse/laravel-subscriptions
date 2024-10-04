@@ -18,12 +18,7 @@ class CheckoutController extends Controller
             ->allowPromotionCodes()
             ->checkout([
                 'success_url' => route('dashboard'),
-                'cancel_url' => route('plans'),
-                [
-                    'metadata' => [
-                        'tenant_id' => 'YOUR_TENANT_ID_HERE'
-                    ]
-                ]
+                'cancel_url' => route('plans')
             ], [
                 'email' => $request->user()->email
             ]);
